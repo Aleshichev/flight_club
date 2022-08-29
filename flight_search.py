@@ -1,17 +1,21 @@
 import requests
+import os
 from flight_data import FlightData
 
 
-TEQUILA_ENDPOINT = "https://tequila-api.kiwi.com"
-APIKEY = "RWU1xvcNJn7VkGgQxIju7FHjwjwXF7eX"
-class FlightSearch:
+TEQUILA_ENDPOINT = os.environ.get('Owm_TEQUILA_ENDPOINT')
+APIKEY = os.environ.get('Owm_APIKEY')
 
+
+class FlightSearch:
+    """This class is responsible for talking to the Flight Search API."""
     def get_destination_code(self, city_name):
+        """Get the destination code and return it"""
         location_endpoint = f"{TEQUILA_ENDPOINT}/locations/query"
         headers = {"apikey": APIKEY}
         params = {
-            "term": city_name,
-            "location_types": "city"
+                  "term": city_name,
+                  "location_types": "city"
         }
 
         response = requests.get(url=location_endpoint,
@@ -21,8 +25,14 @@ class FlightSearch:
         code = results[0]['code']
         return code
 
+
     def chek_flights(self, origin_city_code, destination_city_code,
                      from_time, to_time):
+        """Function checks
+
+         the existence of the flight and returns the city and the price
+
+         """
         headers = {"apikey":APIKEY}
         query = {
             "fly_from": origin_city_code,
@@ -58,4 +68,3 @@ class FlightSearch:
         )
         print(f"{flight_data.destination_city}: £{flight_data.price}")
         return flight_data
-

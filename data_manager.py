@@ -6,11 +6,12 @@ USER_PASSWORD = os.environ.get('mypassword')
 SHEET_ENDPOINT = os.environ.get('sheet_endpoint')
 
 class DataManager:
-
+    """This class is responsible for talking to the Google Sheet."""
     def __init__(self):
         self.destination_data = {}
 
     def get_destination_data(self):
+        """Get and return destination data"""
         response = requests.get(url=SHEET_ENDPOINT, auth=(
         USERNAME,
         USER_PASSWORD,
@@ -20,6 +21,7 @@ class DataManager:
         return self.destination_data
 
     def update_destination_codes(self):
+        """update destination codes"""
         for city in self.destination_data:
             new_data = {
                 "price":{
@@ -34,8 +36,3 @@ class DataManager:
     ))
 
             print(response.text)
-
-
-
-
-

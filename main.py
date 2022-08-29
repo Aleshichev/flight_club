@@ -1,4 +1,3 @@
-#This file will need to use the DataManager,FlightSearch, FlightData, NotificationManager classes to achieve the program requirements.
 from datetime import datetime, timedelta
 from data_manager import DataManager
 from flight_search import FlightSearch
@@ -10,7 +9,6 @@ notification_manager = NotificationManager()
 
 data_manager = DataManager()
 sheet_data = data_manager.get_destination_data()
-print(sheet_data)
 
 if sheet_data[0]['iataCode'] == '':
     for row in sheet_data:
@@ -32,10 +30,12 @@ for destination in sheet_data:
         to_time=six_month_from_today
     )
 
-    if flight.price < destination["lowestPrice"]:
-        notification_manager.send_sms(
-            message=f"Low price alert! Only £{flight.price} to fly from {flight.origin_city}-{flight.origin_airport} "
-                    f"to {flight.destination_city}-{flight.destination_airport}, "
-                    f"from {flight.out_date} to {flight.return_date}."
-        )
-
+    try:
+        if flight.price < destination["lowestPrice"]:
+            notification_manager.send_sms(
+                message=f"Low price alert! Only £{flight.price} to fly from {flight.origin_city}-{flight.origin_airport} "
+                        f"to {flight.destination_city}-{flight.destination_airport}, "
+                        f"from {flight.out_date} to {flight.return_date}."
+            )
+    except AttributeError:
+        pass
