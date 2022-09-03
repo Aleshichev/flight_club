@@ -24,5 +24,7 @@
 4. С помощью модуля datetime определяем дату завтрашнего дня и дня через 6 месяцев.
 5. Для всех направлений из списка данных городов ищем возможные рейсы используя функцию **( def check_flight() )**
 6. Делаем проверку горячего билета. Если цена найденного рейса ниже указанной средней цены,  то с помощью функций **( def send_sms() )** и **( def send_email() )** отправляем на указанный номер и почту пользователя сообщение с горячим предложением.
-
+<img src="https://github.com/Aleshichev/flight_club/blob/main/Flight_2.png" width="600">
+<img src="https://github.com/Aleshichev/flight_club/blob/main/Flight_1.png" width="800">
+<img src="https://github.com/Aleshichev/flight_club/blob/main/photo_2022-09-03_10-52-56.jpg" width="400">
 
