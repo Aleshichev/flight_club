@@ -23,7 +23,7 @@ For the convenience of data management 4 classes are created:
 3. Data validation takes place. If the prices table does not contain the IATA of the cities , then the function **def get_destination_code()** is executed, which makes a request to Kiwi Partners Tequilla API and returns the required airport code for each city. At the same time, the **def update_destination_codes()** function is executed and the necessary data in the "prices" table is updated.
 4. Using the datetime module, we determine the date of tomorrow and the day in 6 months.
 5. For all destinations from the list of given cities we search for possible flights using the function **def check_flight()**.
-6. Делаем проверку горячего билета. Если цена найденного рейса ниже указанной средней цены,  то с помощью функций **def send_sms()** и **def send_email()** отправляем на указанный номер и почту пользователя сообщение с горячим предложением.
+6. Checking a hot ticket. If the price of the found flight is lower than the specified average price, we use **def send_sms()** and **def send_email()** functions to send a message with a hot offer to the specified number and mail of the user.
 <img src="https://github.com/Aleshichev/flight_club/blob/main/Flight_2.png" width="600">
 <img src="https://github.com/Aleshichev/flight_club/blob/main/Flight_1.png" width="800">
 <img src="https://github.com/Aleshichev/flight_club/blob/main/photo_2022-09-03_10-52-56.jpg" width="400">
