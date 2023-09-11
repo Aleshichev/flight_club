@@ -1,28 +1,28 @@
  # “Hot ticket” Flight club (API - Проект)
-В Гугл таблице указаны города и средние цены перелётов. Програма ищет горячие цены  за период 6 месяцев с завтрашнего дня (перелёт в обе стороны).
-Пользователь формирует запрос - вводит имя, фамилию, телефон, почту, IATA города. Получает смс и сообщение на email о найденном рейсе, если существуют цены ниже средних (указанных).
+The Google table shows cities and average flight prices. The programme searches for hot prices for a period of 6 months from tomorrow (round trip).
+The user forms a request - enters name, surname, phone number, mail, IATA of the city. Receives sms and email about the found flight, if there are prices lower than average (specified).
 
-## Используемые ресурсы
--	Google sheet, 
--	Sheety API, 
--	Kiwi Partners Tequilla API,
--	Sms API Twilio, 
--	SMTP outlook
-Модули и библиотеки: datetime , reqests, os, twilio.reat, smtplib. 
+## Resources used
+- Google sheet, 
+- Sheety API, 
+- Kiwi Partners Tequilla API,
+- Sms API Twilio, 
+- SMTP outlook
+Modules and libraries: datetime , reqests, os, twilio.reat, smtplib. 
 
-## Структура проекта
-Для удобства  управления данными создано 4 класса:
-1.	**DataManager** - отвечает за общение с Google Sheet данными.
-2.	**FlightSearch** – отвечает за поиск и обработку информации о перелётах.
-3.	**FlightData** - отвечает за структурирование данных о перелётах.
-4.	**NotificationManager** - отвечает за отправку смс и электронной почты.
+## Project structure
+For the convenience of data management 4 classes are created:
+1.	**DataManager** - responsible for communicating with Google Sheet data.
+2.	**FlightSearch** - responsible for searching and processing flight information.
+3.	**FlightData** - responsible for structuring flight data.
+4.	**NotificationManager** - responsible for sending sms and emails.
 
-## Процесс программы
-1. Вначале программа делает запрос и получает данные из Google sheet таблица “prices” **def get_destination_data()**. 
-2. Пользователь вводит необходимые данные, которые отправляются в таблицу “users” в Google sheet **def new_user()**.
-3. Происходит проверка данных. Если в таблице prices не указаны IATA городов , то выполняется функция **def get_destination_code()**, которая делает запрос к Kiwi Partners Tequilla API и возвращает необходимый код аэропорта каждому городу. При этом выполняется функция **def  update_destination_codes()** и происходит обновление необходимых данных в таблице “prices”.
-4. С помощью модуля datetime определяем дату завтрашнего дня и дня через 6 месяцев.
-5. Для всех направлений из списка данных городов ищем возможные рейсы используя функцию **def check_flight()**
+## Programme Process
+1. First the programme makes a query and gets data from Google sheet table "prices" **def get_destination_data()**. 
+2. The user enters the required data which is sent to the Google sheet table "users" **def new_user()**.
+3. Data validation takes place. If the prices table does not contain the IATA of the cities , then the function **def get_destination_code()** is executed, which makes a request to Kiwi Partners Tequilla API and returns the required airport code for each city. At the same time, the **def update_destination_codes()** function is executed and the necessary data in the "prices" table is updated.
+4. Using the datetime module, we determine the date of tomorrow and the day in 6 months.
+5. For all destinations from the list of given cities we search for possible flights using the function **def check_flight()**.
 6. Делаем проверку горячего билета. Если цена найденного рейса ниже указанной средней цены,  то с помощью функций **def send_sms()** и **def send_email()** отправляем на указанный номер и почту пользователя сообщение с горячим предложением.
 <img src="https://github.com/Aleshichev/flight_club/blob/main/Flight_2.png" width="600">
 <img src="https://github.com/Aleshichev/flight_club/blob/main/Flight_1.png" width="800">
